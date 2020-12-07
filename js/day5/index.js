@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
-require("./definitions");
+require("../utils/string");
 const splitAt = (index) => (x) => [x.slice(0, index), x.slice(index)];
 fs_1.default.readFile("./data.txt", (err, data) => {
     let values = data.toString().split("\r\n");
@@ -28,7 +28,7 @@ fs_1.default.readFile("./data.txt", (err, data) => {
     for (let i = 0; i < IDs.length; ++i) {
         let id = IDs[i];
         if (id - last == 2)
-            console.log(IDs[i - 1], id, IDs[i + 1]);
+            console.log(IDs[i - 1], id);
         last = id;
     }
 });

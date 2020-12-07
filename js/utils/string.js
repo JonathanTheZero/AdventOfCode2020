@@ -1,4 +1,5 @@
 "use strict";
+//Replace all polyfill
 if (!String.prototype.replaceAll) {
     String.prototype.replaceAll = function (str, newStr) {
         // If a regex pattern
