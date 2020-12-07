@@ -53,23 +53,23 @@ function hasValidFields(arr) {
 function hasValidValues(dict) {
     var _a;
     //console.log(dict);
-    let byr = Number(dict.byr);
+    let byr = Number(dict === null || dict === void 0 ? void 0 : dict.byr);
     if (!byr || byr < 1920 || byr > 2002)
         return false;
-    let iyr = Number(dict.iyr);
+    let iyr = Number(dict === null || dict === void 0 ? void 0 : dict.iyr);
     if (!iyr || iyr < 2010 || iyr > 2020)
         return false;
-    let eyr = Number(dict.eyr);
+    let eyr = Number(dict === null || dict === void 0 ? void 0 : dict.eyr);
     if (!eyr || eyr < 2020 || eyr > 2030)
         return false;
-    let height = dict.hgt;
-    if (height.includes("cm")) {
+    let height = dict === null || dict === void 0 ? void 0 : dict.hgt;
+    if (height === null || height === void 0 ? void 0 : height.includes("cm")) {
         let num = Number(height.slice(0, 3));
         if (!num || num < 150 || num > 193)
             return false;
     }
-    else if (height.includes("in")) {
-        let num = Number(height.slice(0, 2));
+    else if (height === null || height === void 0 ? void 0 : height.includes("in")) {
+        let num = Number(height === null || height === void 0 ? void 0 : height.slice(0, 2));
         if (!num || num < 59 || num > 76)
             return false;
     }
