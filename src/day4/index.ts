@@ -9,7 +9,11 @@ const fields = [
     "hcl",
     "ecl",
     "pid"
-]; //cid not required
+] as const; //cid not required
+
+type fieldType = typeof fields[number];
+
+type dictType = { [key in fieldType]? : string};
 
 fs.readFile("./data.txt", (err, data) => {
     const values: string[][] = [];
@@ -22,17 +26,17 @@ fs.readFile("./data.txt", (err, data) => {
     }
 
     for (let v of values) {
-        let keys = [];
+        let keys: fieldType[] = [];
         for (let single of v)
-            keys.push(single.split(":")[0]);
+            keys.push(single.split(":")[0] as fieldType);
         if (hasValidFields(keys)) validCount++
     }
 
     for (let v of values) {
-        let keys = [],
-            dict: { [key: string]: string } = {};
+        let keys: fieldType[] = [],
+            dict: dictType  = {};
         for (let single of v) {
-            let temp = single.split(":");
+            let temp = single.split(":") as [fieldType, string];
             keys.push(temp[0]);
             dict[temp[0]] = temp[1];
         }
@@ -46,7 +50,7 @@ fs.readFile("./data.txt", (err, data) => {
 });
 
 
-function hasValidFields(arr: string[]): boolean {
+function hasValidFields(arr: fieldType[]): boolean {
     let count = 0;
 
     for (let key of arr)
@@ -56,23 +60,23 @@ function hasValidFields(arr: string[]): boolean {
 }
 
 
-function hasValidValues(dict: { [key: string]: string }): boolean {
+function hasValidValues(dict: dictType): boolean {
     //console.log(dict);
-    let byr = Number(dict.byr);
+    let byr = Number(dict?.byr);
     if (!byr || byr < 1920 || byr > 2002) return false;
 
-    let iyr = Number(dict.iyr);
+    let iyr = Number(dict?.iyr);
     if (!iyr || iyr < 2010 || iyr > 2020) return false;
 
-    let eyr = Number(dict.eyr);
+    let eyr = Number(dict?.eyr);
     if (!eyr || eyr < 2020 || eyr > 2030) return false;
 
-    let height = dict.hgt;
-    if (height.includes("cm")) {
+    let height = dict?.hgt;
+    if (height?.includes("cm")) {
         let num = Number(height.slice(0, 3));
         if (!num || num < 150 || num > 193) return false;
-    } else if (height.includes("in")) {
-        let num = Number(height.slice(0, 2));
+    } else if (height?.includes("in")) {
+        let num = Number(height?.slice(0, 2));
         if (!num || num < 59 || num > 76) return false;
     } else return false;
 
