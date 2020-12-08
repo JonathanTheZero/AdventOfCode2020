@@ -8,8 +8,7 @@ fs.readFile("./data.txt", (err, data) => {
     const values = data.toString().split("\r\n");
 
     const bagData: bagData = {},
-        bagNames = /[^\s]* [^\s]* bag[s]?/gm,
-        bagAmount = /\d* [^\s]* [^\s]* bag[s]?/gm;
+        bagNames = /[^\s]* [^\s]* bag[s]?/gm;
 
     let matches: string[] = [];
 
@@ -18,11 +17,6 @@ fs.readFile("./data.txt", (err, data) => {
             bagname = matches![0].slice(0, -1).toString().split(" ").slice(0, -1).join(" "),
             names = matches!.slice(1).map(el => el.split(" ").slice(0, -1).join(" "));
         bagData[bagname] = names;
-
-        let nums: number[] = [];
-        try {
-            nums = val.match(bagAmount)!.map(e => Number(e.match(/\d/g)![0]));
-        } catch (e) { nums = [0]; }
     }
 
     for (let key in bagData)
@@ -40,7 +34,6 @@ fs.readFile("./data.txt", (err, data) => {
                 if (!matches.includes(key) && (bagData[vals]?.includes("shiny gold") || bagData[vals]?.some(el => matches.includes(el)))) matches.push(key);
 
     matches = matches.uniques();
-
 
     //this one with help from Reddit: see https://www.reddit.com/r/adventofcode/comments/k8a31f/2020_day_07_solutions/gezaz0b?utm_source=share&utm_medium=web2x&context=3
     const graph: tree = {};

@@ -1,5 +1,4 @@
 import fs from "fs";
-import { pid } from "process";
 
 const fields = [
     "byr",
@@ -13,12 +12,14 @@ const fields = [
 
 type fieldType = typeof fields[number];
 
-type dictType = { [key in fieldType]? : string};
+type dictType = { [key in fieldType]?: string };
 
 fs.readFile("./data.txt", (err, data) => {
+    if (err) throw err;
     const values: string[][] = [];
     let validCount = 0,
         validTask2 = 0;
+        
     for (let v of data.toString().split("\r\n\r\n")) {
         let temp = v.split(/\r?\n|\r| /g);
         if (temp[temp.length - 1] == "") temp.length -= 1;
@@ -34,7 +35,7 @@ fs.readFile("./data.txt", (err, data) => {
 
     for (let v of values) {
         let keys: fieldType[] = [],
-            dict: dictType  = {};
+            dict: dictType = {};
         for (let single of v) {
             let temp = single.split(":") as [fieldType, string];
             keys.push(temp[0]);

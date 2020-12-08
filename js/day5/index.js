@@ -7,8 +7,9 @@ const fs_1 = __importDefault(require("fs"));
 require("../utils/string");
 const splitAt = (index) => (x) => [x.slice(0, index), x.slice(index)];
 fs_1.default.readFile("./data.txt", (err, data) => {
-    let values = data.toString().split("\r\n");
-    let highestID = -1;
+    if (err)
+        throw err;
+    let values = data.toString().split("\r\n"), highestID = -1;
     for (let val of values) {
         let seat = splitAt(7)(val);
         let row = parseInt(seat[0].replaceAll("F", "0").replaceAll("B", "1"), 2), column = parseInt(seat[1].replaceAll("R", "1").replaceAll("L", "0"), 2);

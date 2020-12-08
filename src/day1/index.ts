@@ -1,4 +1,3 @@
-import { createReadStream } from "fs";
 import fs from "fs";
 
 fs.readFile("./nums.txt", (err, data) => {

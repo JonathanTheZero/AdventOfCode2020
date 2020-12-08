@@ -14,6 +14,8 @@ const fields = [
     "pid"
 ];
 fs_1.default.readFile("./data.txt", (err, data) => {
+    if (err)
+        throw err;
     const values = [];
     let validCount = 0, validTask2 = 0;
     for (let v of data.toString().split("\r\n\r\n")) {

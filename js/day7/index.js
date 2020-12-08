@@ -11,18 +11,11 @@ fs_1.default.readFile("./data.txt", (err, data) => {
     if (err)
         throw err;
     const values = data.toString().split("\r\n");
-    const bagData = {}, bagNames = /[^\s]* [^\s]* bag[s]?/gm, bagAmount = /\d* [^\s]* [^\s]* bag[s]?/gm;
+    const bagData = {}, bagNames = /[^\s]* [^\s]* bag[s]?/gm;
     let matches = [];
     for (let val of values) {
         let matches = val.match(bagNames), bagname = matches[0].slice(0, -1).toString().split(" ").slice(0, -1).join(" "), names = matches.slice(1).map(el => el.split(" ").slice(0, -1).join(" "));
         bagData[bagname] = names;
-        let nums = [];
-        try {
-            nums = val.match(bagAmount).map(e => Number(e.match(/\d/g)[0]));
-        }
-        catch (e) {
-            nums = [0];
-        }
     }
     for (let key in bagData)
         if (bagData[key].includes("shiny gold"))
