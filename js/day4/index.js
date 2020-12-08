@@ -12,7 +12,7 @@ const fields = [
     "hcl",
     "ecl",
     "pid"
-]; //cid not required
+];
 fs_1.default.readFile("./data.txt", (err, data) => {
     const values = [];
     let validCount = 0, validTask2 = 0;
@@ -52,7 +52,6 @@ function hasValidFields(arr) {
 }
 function hasValidValues(dict) {
     var _a;
-    //console.log(dict);
     let byr = Number(dict === null || dict === void 0 ? void 0 : dict.byr);
     if (!byr || byr < 1920 || byr > 2002)
         return false;

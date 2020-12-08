@@ -16,12 +16,6 @@ fs_1.default.readFile("./data.txt", (err, data) => {
             continue;
         const char = cat[cat.length - 1];
         const [min, max] = cat.slice(0, -2).split("-").map(Number);
-        /*console.log(`
-            Cat: ${cat}
-            Str: ${str}
-            Char: ${char}
-            Min/Max: ${min} ${max}
-        `);*/
         let includeAmount = 0;
         for (let c of str)
             if (c == char)

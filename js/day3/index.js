@@ -10,7 +10,6 @@ fs_1.default.readFile("./data.txt", (err, data) => {
     const rows = data.toString().split("\r\n");
     let index = [0, 0], encounters = 0, encountersTask2 = [];
     for (const row of rows) {
-        //const row = rows[index[1]];
         if (row[index[0]] == "#")
             encounters++;
         index[0] += 3;
