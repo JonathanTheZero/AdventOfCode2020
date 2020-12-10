@@ -18,7 +18,6 @@ fs_1.default.readFile("./data.txt", (err, data) => {
             break;
         }
     }
-    console.log(values.slice(0, 25).sum());
     outer: for (let i = 0; i < values.length; ++i) {
         inner: for (let j = i + 1; j < values.length; ++j) {
             let tempArr = [...values.slice(i, j)];
