@@ -30,7 +30,6 @@ fs_1.default.readFile("./data.txt", (err, data) => {
     values.forEach((_val, i, arr) => {
         if (arr[i].startsWith("jmp")) {
             arr[i] = arr[i].replace("jmp", "nop");
-            console.log(arr[i]);
             acc = 0;
             line = 1;
             for (let i = 0; i < 100000; ++i) {
