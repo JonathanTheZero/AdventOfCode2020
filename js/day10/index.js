@@ -52,5 +52,7 @@ fs_1.default.readFile("./data.txt", (err, data) => {
             subPaths[i] = getSub(i);
         }
     }
+    console.time("2");
     console.log("Result Part2:", subPaths[values[0]]);
+    console.timeEnd("2");
 });

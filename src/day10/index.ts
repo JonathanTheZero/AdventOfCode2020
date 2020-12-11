@@ -52,8 +52,7 @@ fs.readFile("./data.txt", (err, data) => {
             subPaths[i] = getSub(i);
         }
     }
-
-    console.log("Result Part2:", subPaths[values[0]]);
+    console.log("Result Part2:", subPaths[values[0]]); //1.5ms
 
     //console.log(caluclateWay(possibleSubs[values[0]]));
 });
