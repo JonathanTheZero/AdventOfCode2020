@@ -28,7 +28,7 @@ fs.readFile("./data.txt", (err, data) => {
         for (let x = 0; x < values.length; ++x) {
             for (let y = 0; y < values[x].length; ++y) {
                 if (temp[x][y] === ".") continue;
-                //console.log(values.map(e => e.join("")).join("\n"), values[x][y], x, y);
+
                 let adj = getAdjacents(x, y);
 
                 if (adj.amountOf("#") === 0 && values[x][y] === "L")
@@ -45,6 +45,7 @@ fs.readFile("./data.txt", (err, data) => {
         totalUsed += line.amountOf("#");
 
     console.log("Task1:", totalUsed);
+    
 
     values = data.toString().split("\r\n").map(e => e.split("")) as seat[][];
     temp = values.map(e => e.map(f => f));
@@ -53,13 +54,9 @@ fs.readFile("./data.txt", (err, data) => {
         for (let x = 0; x < values.length; ++x) {
             for (let y = 0; y < values[x].length; ++y) {
                 if (temp[x][y] === ".") continue;
-                //console.log(values.map(e => e.join("")).join("\n"), values[x][y], x, y);
+
                 let adj = visibleSeats(values, x, y);
-                /*if(Math.random() > 0.85){
-                    console.log(values.map(e => e.join("")).join("\n"));
-                    console.log(x, y, adj, values[x].join(""));
-                    //return;
-                }*/
+                
                 if (adj.amountOf("#") === 0 && values[x][y] === "L")
                     temp[x][y] = "#";
                 else if (adj.amountOf("#") >= 5 && values[x][y] === "#")
