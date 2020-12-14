@@ -10,3 +10,13 @@ if (!String.prototype.replaceAll) {
 String.prototype.containsAny = function (...values) {
     return values.some(el => this.includes(el));
 };
+String.prototype.replaceAt = function (index, replacement) {
+    return this.substring(0, index) + replacement + this.substring(index + 1);
+};
+String.prototype.amountOf = function (item) {
+    let result = 0;
+    for (let i of this)
+        if (i === item)
+            result++;
+    return result;
+};

@@ -11,3 +11,6 @@ Array.prototype.min = function () {
 Array.prototype.max = function () {
     return Math.max(...this);
 };
+Array.prototype.amountOf = function (item) {
+    return this.filter(el => el === item).length;
+};
