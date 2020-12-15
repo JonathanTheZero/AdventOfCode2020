@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function visibleSeats(values, x, y) {
-    var _a;
     let ret = [];
     const deltas = [
         [-1, -1],
@@ -18,7 +17,7 @@ function visibleSeats(values, x, y) {
         while (true) {
             i = x + dx * factor;
             j = y + dy * factor++;
-            let temp = (_a = values[i]) === null || _a === void 0 ? void 0 : _a[j];
+            let temp = values[i]?.[j];
             if (temp !== ".") {
                 ret.push(temp);
                 break;
