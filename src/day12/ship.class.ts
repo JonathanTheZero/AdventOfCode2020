@@ -2,30 +2,30 @@ import type { coordinates, direction, turnDirection } from "./definitions";
 import Waypoint from "./waypoint.class";
 
 export default class Ship {
-    private _coordinates: coordinates;
-    private _direction: direction;
-    private _waypoint: Waypoint; //relative position to the ship
+    #coordinates: coordinates;
+    #direction: direction;
+    #waypoint: Waypoint; //relative position to the ship
 
     constructor(coordinates: coordinates = [0, 0], direction: direction = "E") {
-        this._coordinates = coordinates;
-        this._direction = direction;
-        this._waypoint = new Waypoint([1, 10]);
+        this.#coordinates = coordinates;
+        this.#direction = direction;
+        this.#waypoint = new Waypoint([1, 10]);
     }
 
     get coordinates(): coordinates {
-        return this._coordinates;
+        return this.#coordinates;
     }
 
     get waypoint(): Waypoint {
-        return this._waypoint;
+        return this.#waypoint;
     }
 
     get direction(): direction {
-        return this._direction;
+        return this.#direction;
     }
 
     set direction(direction: direction) {
-        this._direction = direction;
+        this.#direction = direction;
     }
 
     public move(x: number, y: number): void;
@@ -33,16 +33,16 @@ export default class Ship {
     public move(val: number, direction: direction): void;
     public move(a: number, b?: number | direction) {
         if (typeof b === "number") {
-            this._coordinates[0] += a;
-            this._coordinates[1] += b;
+            this.#coordinates[0] += a;
+            this.#coordinates[1] += b;
         } else this.moveBasedOnDirection(a, b);
     }
 
-    private moveBasedOnDirection(a: number, direction = this._direction) {
+    private moveBasedOnDirection(a: number, direction = this.#direction) {
         if (direction === "N") this.coordinates[0] += a;
-        else if (direction === "E") this._coordinates[1] += a;
-        else if (direction === "S") this._coordinates[0] -= a;
-        else if (direction === "W") this._coordinates[1] -= a;
+        else if (direction === "E") this.#coordinates[1] += a;
+        else if (direction === "S") this.#coordinates[0] -= a;
+        else if (direction === "W") this.#coordinates[1] -= a;
     }
 
     public turn(direction: turnDirection, degrees: number) {
@@ -64,7 +64,7 @@ export default class Ship {
     }
 
     public moveTowardsWaypoint(value: number) {
-        this._coordinates[0] += value * this._waypoint.coordinates[0];
-        this._coordinates[1] += value * this._waypoint.coordinates[1];
+        this.#coordinates[0] += value * this.#waypoint.coordinates[0];
+        this.#coordinates[1] += value * this.#waypoint.coordinates[1];
     }
 }

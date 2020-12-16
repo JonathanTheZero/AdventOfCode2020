@@ -1,46 +1,62 @@
 "use strict";
+var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, privateMap, value) {
+    if (!privateMap.has(receiver)) {
+        throw new TypeError("attempted to set private field on non-instance");
+    }
+    privateMap.set(receiver, value);
+    return value;
+};
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, privateMap) {
+    if (!privateMap.has(receiver)) {
+        throw new TypeError("attempted to get private field on non-instance");
+    }
+    return privateMap.get(receiver);
+};
+var _coordinates;
 Object.defineProperty(exports, "__esModule", { value: true });
 class Waypoint {
     constructor(coordinates) {
-        this._coordinates = coordinates;
+        _coordinates.set(this, void 0);
+        __classPrivateFieldSet(this, _coordinates, coordinates);
     }
     get coordinates() {
-        return this._coordinates;
+        return __classPrivateFieldGet(this, _coordinates);
     }
     move(amount, direction) {
         if (typeof amount === "number" && typeof direction === "string") {
             if (direction === "N")
                 this.coordinates[0] += amount;
             else if (direction === "E")
-                this._coordinates[1] += amount;
+                __classPrivateFieldGet(this, _coordinates)[1] += amount;
             else if (direction === "S")
-                this._coordinates[0] -= amount;
+                __classPrivateFieldGet(this, _coordinates)[0] -= amount;
             else if (direction === "W")
-                this._coordinates[1] -= amount;
+                __classPrivateFieldGet(this, _coordinates)[1] -= amount;
         }
         else if (Array.isArray(amount)) {
-            this._coordinates[0] += amount[0];
-            this._coordinates[1] += amount[1];
+            __classPrivateFieldGet(this, _coordinates)[0] += amount[0];
+            __classPrivateFieldGet(this, _coordinates)[1] += amount[1];
         }
     }
     moveTo(x, y) {
-        this._coordinates[0] = x;
-        this._coordinates[1] = y;
+        __classPrivateFieldGet(this, _coordinates)[0] = x;
+        __classPrivateFieldGet(this, _coordinates)[1] = y;
     }
     turnAround(turnDirection, degrees) {
-        let [tempX, tempY] = this._coordinates;
+        let [tempX, tempY] = __classPrivateFieldGet(this, _coordinates);
         if (degrees === 180) {
-            this._coordinates[0] = -tempX;
-            this._coordinates[1] = -tempY;
+            __classPrivateFieldGet(this, _coordinates)[0] = -tempX;
+            __classPrivateFieldGet(this, _coordinates)[1] = -tempY;
         }
         else if (degrees === 90 && turnDirection === "L" || degrees === 270 && turnDirection === "R") {
-            this._coordinates[0] = tempY;
-            this._coordinates[1] = -tempX;
+            __classPrivateFieldGet(this, _coordinates)[0] = tempY;
+            __classPrivateFieldGet(this, _coordinates)[1] = -tempX;
         }
         else if (degrees === 90 && turnDirection === "R" || degrees === 270 && turnDirection === "L") {
-            this._coordinates[0] = -tempY;
-            this._coordinates[1] = tempX;
+            __classPrivateFieldGet(this, _coordinates)[0] = -tempY;
+            __classPrivateFieldGet(this, _coordinates)[1] = tempX;
         }
     }
 }
 exports.default = Waypoint;
+_coordinates = new WeakMap();
