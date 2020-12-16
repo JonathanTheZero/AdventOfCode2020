@@ -5,6 +5,7 @@ interface String {
 	amountOf(item: string): number;
 }
 
+
 //Replace all polyfill
 if (!String.prototype.replaceAll) {
 	String.prototype.replaceAll = function (str: string | RegExp, newStr: string) {

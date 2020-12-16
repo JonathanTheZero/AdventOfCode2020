@@ -1,4 +1,5 @@
 import fs from "fs";
+import type {nums, letters, exNums} from "../utils/utilTypes";
 
 type format = `${nums} - ${nums | `${nums}${exNums}`} ${letters}`;
 
