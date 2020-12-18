@@ -15,7 +15,7 @@ Array.prototype.uniques = function () {
 };
 
 Array.prototype.sum = function () {
-    return typeof this[0] === "bigint" ? this.reduce((a, b) => a + b, 0n) : this.reduce((a, b) => a + b, 0);
+    return typeof this[0] === "bigint" ? this.reduce((a, b) => a + b, BigInt(0)) : this.reduce((a, b) => a + b, 0);
 };
 
 Array.prototype.min = function () {

@@ -33,7 +33,7 @@ fs.readFile("./data.txt", (err, data) => {
         }
     }
 
-    let result = Object.keys(maskedNumbers).reduce((prev, curr) => prev + maskedNumbers[curr], 0n);
+    let result = Object.keys(maskedNumbers).reduce((prev, curr) => prev + maskedNumbers[curr], BigInt(0));
 
     console.log("Task1:", result);
 
@@ -64,7 +64,7 @@ fs.readFile("./data.txt", (err, data) => {
         }
     }
 
-    result = Object.keys(maskedNumbers2).reduce((prev, curr) => prev + maskedNumbers2[curr], 0n);
+    result = Object.keys(maskedNumbers2).reduce((prev, curr) => prev + maskedNumbers2[curr], BigInt(0));
 
     console.log("Task2:", result)
 });

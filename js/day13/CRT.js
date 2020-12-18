@@ -23,7 +23,7 @@ function chineseRemainderTheorem(lines) {
         const inverse = getInverse(nU, cur);
         console.log(`x = ${a} (mod ${cur})`);
         return acc + BigInt(BigInt(a) * BigInt(nU) * BigInt(inverse));
-    }, 0n);
+    }, BigInt(0));
     return sum % BigInt(N);
 }
 exports.chineseRemainderTheorem = chineseRemainderTheorem;

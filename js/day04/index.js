@@ -53,23 +53,24 @@ function hasValidFields(arr) {
     return count == fields.length;
 }
 function hasValidValues(dict) {
-    let byr = Number(dict?.byr);
+    var _a;
+    let byr = Number(dict === null || dict === void 0 ? void 0 : dict.byr);
     if (!byr || byr < 1920 || byr > 2002)
         return false;
-    let iyr = Number(dict?.iyr);
+    let iyr = Number(dict === null || dict === void 0 ? void 0 : dict.iyr);
     if (!iyr || iyr < 2010 || iyr > 2020)
         return false;
-    let eyr = Number(dict?.eyr);
+    let eyr = Number(dict === null || dict === void 0 ? void 0 : dict.eyr);
     if (!eyr || eyr < 2020 || eyr > 2030)
         return false;
-    let height = dict?.hgt;
-    if (height?.includes("cm")) {
+    let height = dict === null || dict === void 0 ? void 0 : dict.hgt;
+    if (height === null || height === void 0 ? void 0 : height.includes("cm")) {
         let num = Number(height.slice(0, 3));
         if (!num || num < 150 || num > 193)
             return false;
     }
-    else if (height?.includes("in")) {
-        let num = Number(height?.slice(0, 2));
+    else if (height === null || height === void 0 ? void 0 : height.includes("in")) {
+        let num = Number(height === null || height === void 0 ? void 0 : height.slice(0, 2));
         if (!num || num < 59 || num > 76)
             return false;
     }
@@ -82,7 +83,7 @@ function hasValidValues(dict) {
     let ecl = dict.ecl;
     if (!ecl || !ecls.includes(ecl))
         return false;
-    if (dict?.pid?.length !== 9)
+    if (((_a = dict === null || dict === void 0 ? void 0 : dict.pid) === null || _a === void 0 ? void 0 : _a.length) !== 9)
         return false;
     return true;
 }

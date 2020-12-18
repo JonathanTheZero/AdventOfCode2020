@@ -7,6 +7,7 @@ const fs_1 = __importDefault(require("fs"));
 require("../utils/string");
 require("../utils/array");
 fs_1.default.readFile("./data.txt", (err, data) => {
+    var _a, _b, _c;
     if (err)
         throw err;
     const values = data.toString().split("\r\n");
@@ -21,13 +22,13 @@ fs_1.default.readFile("./data.txt", (err, data) => {
             matches.push(key);
     for (let key in bagData)
         for (let vals of bagData[key])
-            if (bagData[vals]?.includes("shiny gold"))
+            if ((_a = bagData[vals]) === null || _a === void 0 ? void 0 : _a.includes("shiny gold"))
                 matches.push(key);
     matches = matches.uniques();
     for (let i = 0; i < 5; ++i)
         for (let key in bagData)
             for (let vals of bagData[key])
-                if (!matches.includes(key) && (bagData[vals]?.includes("shiny gold") || bagData[vals]?.some(el => matches.includes(el))))
+                if (!matches.includes(key) && (((_b = bagData[vals]) === null || _b === void 0 ? void 0 : _b.includes("shiny gold")) || ((_c = bagData[vals]) === null || _c === void 0 ? void 0 : _c.some(el => matches.includes(el)))))
                     matches.push(key);
     matches = matches.uniques();
     const graph = {};
