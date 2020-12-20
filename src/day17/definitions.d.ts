@@ -1,1 +1,5 @@
-export type coordinates = [number, number, number];
+export type coordinates = [
+    number,
+    number,
+    number
+];

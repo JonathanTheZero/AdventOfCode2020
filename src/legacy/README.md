@@ -1,0 +1,1 @@
+This folder is for code parts, which I really liked but weren't usable for all/some cases but I didn't want to delete them.
