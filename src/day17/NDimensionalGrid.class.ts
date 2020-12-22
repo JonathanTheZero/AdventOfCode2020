@@ -6,13 +6,13 @@ import { States } from "./definitions";
 
 
 export default class NDimensionalGrid<D extends nums> {
-    #dimensions: number;
+    #dimensions: D;
     #grid: gridType<string> = {};
     #originalGrid: string; //saving as string to save by value and not by reference
     #defaultVal: States;
     #neighbourCache: gridType<string[]> = {};
 
-    constructor(dimensions: number, originalGrid: NestedArray<string, D>, defaultVal = States.Inactive) {
+    constructor(dimensions: D, originalGrid: NestedArray<string, D>, defaultVal = States.Inactive) {
         this.#dimensions = dimensions;
         originalGrid.flat()
         this.#originalGrid = JSON.stringify(originalGrid);
