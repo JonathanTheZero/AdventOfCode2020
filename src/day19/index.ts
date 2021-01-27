@@ -1,5 +1,5 @@
 import fs from "fs";
-import generateDictPart2 from "./alterDict";
+import generateDictPart2 from "./generateDictPart2";
 import generateDict from "./generateDict";
 
 
