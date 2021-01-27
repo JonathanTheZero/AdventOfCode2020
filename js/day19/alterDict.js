@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-function generateDict(str) {
+function generateDictPart2(str) {
     let dict = new Map();
     const lines = str.split("\r\n");
     while (dict.size !== lines.length) {
@@ -33,9 +33,16 @@ function generateDict(str) {
                 else {
                     console.log(arr);
                 }
+                if (Number(index) === 8 && dict.get(8)) {
+                    dict.set(8, new RegExp(`(${dict.get(8).toString().slice(1, -1)}){1,}`));
+                }
+                else if (Number(index) === 11 && dict.get(42) && dict.get(31)) {
+                    let r42 = dict.get(42).toString().slice(1, -1), r31 = dict.get(31).toString().slice(1, -1), combined = new RegExp(`(${r42}${r31})`);
+                    dict.set(11, new RegExp(`(${r42}(${r42}(${r42}(${r42}(${combined})?${r31})?${r31})?${r31})?${r31})`));
+                }
             }
         }
     }
     return dict;
 }
-exports.default = generateDict;
+exports.default = generateDictPart2;

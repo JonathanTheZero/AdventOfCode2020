@@ -1,20 +1,6 @@
-export default function generateDict(str: string): Map<number, RegExp> {
+export default function generateDictPart2(str: string): Map<number, RegExp> {
     let dict = new Map<number, RegExp>();
     const lines = str.split("\r\n");
-
-    /*for (let line of str.split("\r\n")) {
-        let [index, rule] = line.split(":");
-        if (rule.trim().startsWith('"')) {
-            dict.set(Number(index), rule.trim()[1]);
-        } else {
-            let o = rule.split("|"),
-                arr = [];
-            for (let p of o)
-                arr.push(p.trim().split(" ").map(Number) as [number, number]);
-
-            dict.set(Number(index), arr);
-        }
-    }*/
 
     while (dict.size !== lines.length) {
         lines: for (let line of lines) {
@@ -51,6 +37,17 @@ export default function generateDict(str: string): Map<number, RegExp> {
                     }
                 } else {
                     console.log(arr);
+                }
+
+                if (Number(index) === 8 && dict.get(8)) {
+                    dict.set(8, new RegExp(`(${dict.get(8)!.toString().slice(1, -1)}){1,}`));
+                } else if (Number(index) === 11 && dict.get(42) && dict.get(31)) {
+                    let r42 = dict.get(42)!.toString().slice(1, -1),
+                        r31 = dict.get(31)!.toString().slice(1, -1),
+                        combined = new RegExp(`(${r42}${r31})`);
+
+                    //Bruteforce-like thing, but it works
+                    dict.set(11, new RegExp(`(${r42}(${r42}(${r42}(${r42}(${combined})?${r31})?${r31})?${r31})?${r31})`));
                 }
             }
             //ordered:
