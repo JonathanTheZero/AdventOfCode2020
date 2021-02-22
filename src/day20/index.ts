@@ -6,8 +6,8 @@ import Tile from "./tile.class";
 fs.readFile("./data.txt", (err, data) => {
     if (err) throw err;
 
-    const tilesData = data.toString().split("\r\n\r\n");
-    let tiles: Tile[] = [];
+    const tilesData = data.toString().split("\r\n\r\n"),
+        tiles: Tile[] = [];
 
     for (const tile of tilesData) {
         const lines = tile.split("\r\n");
@@ -20,15 +20,19 @@ fs.readFile("./data.txt", (err, data) => {
         console.log("\n\n");
         tiles[0].rotate()
     }*/
-    const entryPoint = tiles[0];
-    tiles = buildGrid(tiles);
+    buildGrid(tiles);
 
-    const leftTop = tiles.filter(e => !e.top && !e.left)[0],
+    //console.log(tiles[0].toString(), "\n\n",  (tiles[0].mirror(), tiles[0].toString()));
+
+    let leftTop = tiles.filter(e => !e.top && !e.left)[0],
         rightTop = tiles.filter(e => !e.top && !e.right)[0],
         leftBottom = tiles.filter(e => !e.bottom && !e.left)[0],
         rightBottom = tiles.filter(e => !e.bottom && !e.right)[0];
 
-        console.log(leftTop);
+    //console.log(leftTop);
+    for (const tile of tiles) {
+        console.log(tile.id, "Left:", tile.left?.id, "Top:", tile.top?.id, "Right:", tile.right?.id, "Bottom:", tile.bottom?.id);
+    }
 
-        console.log(leftBottom.id * leftTop.id * rightBottom.id * rightTop.id);
+    console.log("Final result:", leftBottom.id * leftTop.id * rightBottom.id * rightTop.id);
 });

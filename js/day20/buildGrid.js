@@ -2,41 +2,42 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const utils_1 = require("../utils/utils");
 function buildGrid(tiles) {
-    const usedTiles = [], length = tiles.length;
-    while (usedTiles.length != length) {
-        for (const tile of tiles) {
-            for (let dir of ["top", "bottom", "left", "right"]) {
-                if (tile[dir])
+    let iter = 0;
+    for (const tile of tiles) {
+        console.log(iter++);
+        for (let dir of ["top", "bottom", "left", "right"]) {
+            if (tile[dir] || tile.neighbourLength === 4)
+                continue;
+            let oppDir = utils_1.oppositeDirection(dir);
+            const possibleTiles = tiles.filter(e => (e.edges.includes(tile.edge(dir)) || e.edges.includes([...tile.edge(dir)].reverse().join("")))
+                && e.id !== tile.id);
+            for (let possibleTile of possibleTiles) {
+                if (tile.neighbourIDs.includes(possibleTile.id) || possibleTile[oppDir] || tile[dir] || possibleTile.neighbourLength === 4)
                     continue;
-                let possibleTile = tiles.filter(e => (e.edges.includes(tile.edge(dir)) || e.edges.includes([...tile.edge(dir)].reverse().join(""))) && e.id !== tile.id)[0];
-                if (!possibleTile || possibleTile.neighbourIDs.includes(tile.id))
-                    continue;
-                for (let i = 0; i < 5; ++i) {
-                    if (possibleTile.edge(utils_1.oppositeDirection(dir)) !== tile.edge(dir)) {
+                for (let i = 0; i < 4; ++i) {
+                    if (possibleTile.edge(oppDir) === tile.edge(dir)) {
                         tile[dir] = possibleTile;
-                        possibleTile[utils_1.oppositeDirection(dir)] = tile;
+                        possibleTile[oppDir] = tile;
                         break;
                     }
                     possibleTile.rotate();
+                    possibleTile.resetChanges();
                 }
                 if (!tile[dir]) {
                     possibleTile.mirror();
-                    for (let i = 0; i < 5; ++i) {
-                        if (possibleTile.edge(utils_1.oppositeDirection(dir)) !== tile.edge(dir)) {
+                    possibleTile.resetChanges();
+                    for (let i = 0; i < 4; ++i) {
+                        if (possibleTile.edge(oppDir) === tile.edge(dir)) {
                             tile[dir] = possibleTile;
-                            possibleTile[utils_1.oppositeDirection(dir)] = tile;
+                            possibleTile[oppDir] = tile;
                             break;
                         }
                         possibleTile.rotate();
+                        possibleTile.resetChanges();
                     }
-                }
-                if (!usedTiles.includes(tile)) {
-                    usedTiles.push(tile);
                 }
             }
         }
-        console.log(usedTiles.length);
     }
-    return tiles;
 }
 exports.default = buildGrid;
