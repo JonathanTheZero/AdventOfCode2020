@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.buildGridString = exports.buildGrid = void 0;
 const utils_1 = require("../utils/utils");
 function buildGrid(tiles) {
     let iter = 0;
@@ -40,4 +41,29 @@ function buildGrid(tiles) {
         }
     }
 }
-exports.default = buildGrid;
+exports.buildGrid = buildGrid;
+function buildGridString(topLeft, dimension) {
+    let resStr = "", lineStrs = [], curr = topLeft, lineBegin = topLeft;
+    for (let i = 0; i < dimension; ++i) {
+        while (curr && lineBegin) {
+            lineStrs.push(curr.gridWithoutEdges);
+            curr = curr.right;
+        }
+        lineBegin = lineBegin === null || lineBegin === void 0 ? void 0 : lineBegin.bottom;
+        curr = lineBegin;
+        resStr += gridToString(lineStrs);
+        lineStrs = [];
+    }
+    return resStr;
+}
+exports.buildGridString = buildGridString;
+function gridToString(grids) {
+    let resStr = "", mappedGrids = grids.map(e => e.map(f => f.join("")));
+    for (let i = 0; i < grids[0].length; ++i) {
+        for (let grid of mappedGrids) {
+            resStr += grid[i];
+        }
+        resStr += "\n";
+    }
+    return resStr;
+}

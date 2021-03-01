@@ -1,5 +1,7 @@
 import fs from "fs";
-import buildGrid from "./buildGrid";
+import { buildGrid, buildGridString } from "./buildGrid";
+import gridMatchMonster from "./gridMatchMonster";
+import Seamonster from "./seamonster.class";
 import Tile from "./tile.class";
 
 
@@ -35,4 +37,12 @@ fs.readFile("./data.txt", (err, data) => {
     }
 
     console.log("Final result:", leftBottom.id * leftTop.id * rightBottom.id * rightTop.id);
+
+    let s: Seamonster = new Seamonster("                  # \n#    ##    ##    ###\n #  #  #  #  #  #   ");
+    //console.log(s.look);
+
+    let gridStr = buildGridString(leftTop, Math.sqrt(tiles.length));
+
+    let a = gridMatchMonster(gridStr, s);
+    console.log(a)
 });

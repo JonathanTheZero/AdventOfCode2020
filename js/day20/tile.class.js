@@ -44,6 +44,11 @@ class Tile {
         var _a, _b, _c, _d;
         return [(_a = this.top) === null || _a === void 0 ? void 0 : _a.id, (_b = this.left) === null || _b === void 0 ? void 0 : _b.id, (_c = this.right) === null || _c === void 0 ? void 0 : _c.id, (_d = this.bottom) === null || _d === void 0 ? void 0 : _d.id];
     }
+    get gridWithoutEdges() {
+        let arr = this.grid.map(e => e);
+        arr = arr.slice(1, -1).map(e => e.slice(1, -1));
+        return arr;
+    }
     rotate() {
         this.grid = this.grid.map((_, i) => this.grid.map(e => e[i]).reverse());
         this.changed = true;

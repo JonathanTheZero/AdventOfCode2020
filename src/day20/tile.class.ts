@@ -1,12 +1,16 @@
 import { EOL } from "os";
-import type { directions } from "../utils/utilTypes";
+import type { directions, Nullable } from "../utils/utilTypes";
 
-
+/**
+ * implemented as decentralized data structure
+ * more or less only for this usecase
+ * allows construction without coordinates
+ */
 export default class Tile {
-    top: Tile | null = null;
-    left: Tile | null = null;
-    right: Tile | null = null;
-    bottom: Tile | null = null;
+    top: Nullable<Tile> = null;
+    left: Nullable<Tile> = null;
+    right: Nullable<Tile> = null;
+    bottom: Nullable<Tile> = null;
 
     changed = false;
 
@@ -50,6 +54,12 @@ export default class Tile {
         return [this.top?.id, this.left?.id, this.right?.id, this.bottom?.id];
     }
 
+    get gridWithoutEdges(){
+        let arr = this.grid.map(e => e);
+        arr = arr.slice(1, -1).map(e => e.slice(1, -1));
+        return arr;
+    }
+
     /**
      * Rotates the array clockwise
      * @param amount number of turns
@@ -75,7 +85,7 @@ export default class Tile {
     /**
      * Resets all the markers for the whole grid/graph.
      * This functionality is in a seperate method for 
-     * a HUGE performance boost when working with the recurive rotate/mirror
+     * a HUGE performance boost when working with the recursive rotate/mirror
      * functions
      */
     public resetChanges() {

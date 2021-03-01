@@ -1,8 +1,9 @@
 import { oppositeDirection } from "../utils/utils";
+import type { Nullable } from "../utils/utilTypes";
 import Tile from "./tile.class";
 
 
-export default function buildGrid(tiles: Tile[]): void {
+export function buildGrid(tiles: Tile[]): void {
     let iter = 0;
     for (const tile of tiles) {
         console.log(iter++);
@@ -45,4 +46,41 @@ export default function buildGrid(tiles: Tile[]): void {
             }
         }
     }
+}
+
+
+export function buildGridString(topLeft: Tile, dimension: number): string {
+    let resStr: string = "",
+        lineStrs: string[][][] = [], 
+        curr: Nullable<Tile> = topLeft,
+        lineBegin: Nullable<Tile> = topLeft;
+
+    for (let i = 0; i < dimension; ++i) {
+        while (curr && lineBegin) {
+            lineStrs.push(curr.gridWithoutEdges);
+            curr = curr.right;
+        }
+        lineBegin = lineBegin?.bottom;
+        curr = lineBegin;
+        resStr += gridToString(lineStrs);
+        lineStrs = [];
+    }
+
+    return resStr;
+}
+
+
+function gridToString(grids: string[][][]): string {
+    let resStr: string = "",
+        //join lines, since single characters can be ignored
+        mappedGrids: string[][] = grids.map(e => e.map(f => f.join("")));
+
+    for (let i = 0; i < grids[0].length; ++i) {
+        for (let grid of mappedGrids) {
+            resStr += grid[i];
+        }
+        resStr += "\n";
+    }
+
+    return resStr;
 }
