@@ -31,10 +31,10 @@ fs.readFile("./data.txt", (err, data) => {
         leftBottom = tiles.filter(e => !e.bottom && !e.left)[0],
         rightBottom = tiles.filter(e => !e.bottom && !e.right)[0];
 
-    //console.log(leftTop);
+    /*console.log(leftTop);
     for (const tile of tiles) {
         console.log(tile.id, "Left:", tile.left?.id, "Top:", tile.top?.id, "Right:", tile.right?.id, "Bottom:", tile.bottom?.id);
-    }
+    }*/
 
     console.log("Final result:", leftBottom.id * leftTop.id * rightBottom.id * rightTop.id);
 

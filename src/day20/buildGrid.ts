@@ -4,9 +4,9 @@ import Tile from "./tile.class";
 
 
 export function buildGrid(tiles: Tile[]): void {
-    let iter = 0;
+    //let iter = 0;
     for (const tile of tiles) {
-        console.log(iter++);
+        //console.log(iter++);
         for (let dir of <const>["top", "bottom", "left", "right"]) {
             if (tile[dir] || tile.neighbourLength === 4)
                 continue;

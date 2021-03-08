@@ -3,9 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.buildGridString = exports.buildGrid = void 0;
 const utils_1 = require("../utils/utils");
 function buildGrid(tiles) {
-    let iter = 0;
     for (const tile of tiles) {
-        console.log(iter++);
         for (let dir of ["top", "bottom", "left", "right"]) {
             if (tile[dir] || tile.neighbourLength === 4)
                 continue;

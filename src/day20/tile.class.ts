@@ -1,6 +1,7 @@
 import { EOL } from "os";
 import type { directions, Nullable } from "../utils/utilTypes";
 
+
 /**
  * implemented as decentralized data structure
  * more or less only for this usecase
@@ -54,7 +55,7 @@ export default class Tile {
         return [this.top?.id, this.left?.id, this.right?.id, this.bottom?.id];
     }
 
-    get gridWithoutEdges(){
+    get gridWithoutEdges() {
         let arr = this.grid.map(e => e);
         arr = arr.slice(1, -1).map(e => e.slice(1, -1));
         return arr;
@@ -68,7 +69,8 @@ export default class Tile {
         this.grid = this.grid.map((_, i) => this.grid.map(e => e[i]).reverse());
         this.changed = true;
         for (let n of this.neighbours) {
-            if (!n?.changed) n?.rotate();
+            if (!n?.changed)
+                n?.rotate();
         }
         [this.top, this.right, this.bottom, this.left] = [this.left, this.top, this.right, this.bottom];
     }
@@ -77,7 +79,8 @@ export default class Tile {
         this.grid = this.grid.map(e => e.reverse());
         this.changed = true;
         for (let n of this.neighbours) {
-            if (!n?.changed) n?.mirror();
+            if (!n?.changed)
+                n?.mirror();
         }
         [this.left, this.right] = [this.right, this.left];
     }
@@ -91,7 +94,8 @@ export default class Tile {
     public resetChanges() {
         this.changed = false;
         for (let n of this.neighbours) {
-            if (n?.changed) n.resetChanges();
+            if (n?.changed)
+                n.resetChanges();
         }
     }
 

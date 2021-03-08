@@ -3,18 +3,19 @@ import Seamonster from "./seamonster.class";
 
 /**
  * @returns number of # outside of the monsters possible rooms
- * returns number[] because for some reason, there are several possible matchings
+ * returns number[] because for some reason, there are several possible matchings if you flip it
  */
 export default function gridMatchMonster(gridStr: string, monster: Seamonster): number[] {
     let gridArr: string[][] = gridStr.split("\n").map(e => e.split("")),
         monsterCharAmount = monster.toString().amountOf("#"),
         ret: number[] = [];
 
+    //console.log(gridStr);
     for (let _ = 0; _ < 2; _++) {
         for (let i = 0; i < 4; ++i) {
             let matchingAmount = gridStr.match(monster.regEx);
 
-            console.log(matchingAmount?.length)
+            //console.log(matchingAmount?.length)
             if (matchingAmount)
                 ret.push(gridStr.amountOf("#") - (matchingAmount.length * monsterCharAmount));
 
